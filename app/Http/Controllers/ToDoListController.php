@@ -12,6 +12,7 @@ class ToDoListController extends Controller
      */
     public function index()
     {
+        ToDoList::all();
         
     }
 

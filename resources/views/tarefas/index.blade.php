@@ -4,8 +4,13 @@
     <h1>Tarefas</h1>
 </div>
 <div>
-    <table class="table  table-bordered table-hover ">
+    <table class="table table-sm table-hover ">
         <tbody>
+          <tr>
+              <th>Titulo</th>
+              <th>Descricao</th>
+              <th>Prioridade</th>
+          </tr>
           @forelse($tarefas as $tarefa)
               <tr>
                   <td>{{$tarefa->titulo}}</td>

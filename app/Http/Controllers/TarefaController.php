@@ -15,20 +15,32 @@ class TarefaController extends Controller
     }
 
     public function create(){
-        // $tarefas = Tarefa::all();
+
         $tarefas =  null;
-        return view('tarefas.form', compact( 'tarefas'));
+        $todoLists = [];
+        return view('tarefas.form', compact( 'tarefas', 'todoLists'));
     }
 
     public function store(Request $request){
 
+        dd($request->all());
+        
       $validated = $request->validate([
             'titulo' => 'required',
             'descricao' => 'required',
             // 'prioridade' => 'required',
+            'todoLists' => 'required|array',
         ]);
 
-        Tarefa::create($validated);
+        $tarefa = Tarefa::create();
+
+        foreach ($request->todoLists as $todoList) {
+            ToDoList::create([
+                'descricao' => $todoList,
+                'tarefa_id' => $tarefa->id
+            ]);
+        };
+
         return redirect()->route('tarefas.index');
     }
 
